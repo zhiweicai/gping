@@ -82,7 +82,8 @@ app.controller('MapCtrl', function ($scope) {
             infoWindow.open($scope.map, marker);
         });
         
-        $scope.markers.push(marker);        
+        $scope.markers.push(marker);
+        
     }  
     
     for (i = 0; i < cities.length; i++){
@@ -97,3 +98,13 @@ app.controller('MapCtrl', function ($scope) {
 });
 
 
+
+app.controller('SubmitCtrl', function ($scope) {
+
+    $scope.text = '';
+    $scope.submit = function () {
+      if ($scope.text) {
+          alert (this.text);
+        }
+    }
+});

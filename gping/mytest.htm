@@ -11,20 +11,29 @@
  
 <body>
 
+   <div id="submitform" ng-controller="SubmitCtrl" ng-submit="submit()"> 
+		<form name="submitform">
+		  Destination: <input type="text" ng-model="text" name="text">	 
+		  <input type="submit" id="submit" value="submit">
+		</form>
+	</div>
 
 	<div ng-controller="MapCtrl">   
 	    <div id="map"></div>
-	    <div id="repeatng" ng-repeat="marker in markers | orderBy : 'title'">
+	    <div id="repeat" ng-repeat="marker in markers | orderBy : 'title'">
 	         <a id="country_container" href="#" ng-click="openInfoWindow($event, marker)">
 	         <label id="names" >{{marker.title}}</label>
 	         </a>
 	    </div>
 	</div>
 
+
+
 </body>
 
 
 </html>
+
 
 
 
