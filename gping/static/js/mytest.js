@@ -35,6 +35,19 @@ app.controller('MapCtrl', function ($scope,$http) {
     $scope.markers = [];
     
     var infoWindow = new google.maps.InfoWindow();
+
+    var mypathArray = [];
+
+    var pingpath = new google.maps.Polyline({
+        path: mypathArray,
+        geodesic: true,
+        strokeColor: '#FF0000',
+        strokeOpacity: 1.0,
+        strokeWeight: 2
+      });
+
+    pingpath.setMap($scope.map);
+
     
     var createMarker = function (info){
         
@@ -55,6 +68,10 @@ app.controller('MapCtrl', function ($scope,$http) {
         });
         
         $scope.markers.push(marker);
+
+        var newpath = pingpath.getPath().getArray();
+        newpath.push(marker.position);
+        pingpath.setPath(newpath);
     }  
     
 
@@ -68,7 +85,11 @@ app.controller('MapCtrl', function ($scope,$http) {
         $scope.markers[i].setMap(null);
       }
       $scope.markers = [];
+      pingpath.getPath().clear ();
     }
+
+
+
 
     $scope.submit = function () {
 
