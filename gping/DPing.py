@@ -7,6 +7,7 @@ import json
 from scapy.all import *
 import threading
 import Queue
+import socket
 
 class pingThread (threading.Thread):
     def __init__(self, name, q):
@@ -20,20 +21,21 @@ class pingThread (threading.Thread):
         print "Exiting " + self.name
 
     def DoPing (self,hostname,rq):
+        hostip = socket.gethostbyname(hostname)
         for i in range(1, 20):
-            pkt = IP(dst=hostname, ttl=i) / UDP(dport=80)
+            pkt = IP(dst=hostip, ttl=i) / TCP(dport=80,sport=12010,flags="S")
             reply = sr1(pkt, verbose=0,timeout=1,retry=3)
 
             if (reply is not None):
                 hostinfo = GetHostInfo (reply.src)
 
                 if (len(hostinfo) > 0):
-                    if (reply.type == 3):
+                    if (reply.ack == 1):
                         hostinfo['last'] = True
                     if (i == 19):
                         hostinfo['last'] = True
                     rq.put (json.dumps (hostinfo))
-                if (reply.type == 3):
+                if (reply.ack == 1):
                    # We've reached our destination
                    print "Done!", hostinfo
                    break

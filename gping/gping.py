@@ -9,7 +9,7 @@ from urllib2 import urlopen
 q = Queue.Queue()
 threads = []
 app = Flask(__name__)
-
+myinfo = {}
 
 @app.route('/')
 def hello_world():
@@ -25,9 +25,14 @@ def ping ():
      result = request.query_string.split ('=')
      print result[1]
 
+     my_ip = urlopen('http://ip.42.pl/raw').read()
+     mylocalinfo = GetHostInfo (my_ip)
+     q.put (json.dumps (mylocalinfo))
+
      mythread = pingThread (result[1], q)
      threads.append(mythread)
      mythread.start ()
+
      return request.query_string
 
 

@@ -8,18 +8,25 @@ a {
 
 .myinfo {
     display: inline;
+    margin-left: 10px;
+    margin-right: 3px;
+}
+
+#destination {
+    margin-left: 140px;
+    color: red;
 }
 
 #map{
       height:700px;
-      width:1000px;
+      width:100%;
       box-shadow: 3px 3px 10px gray;
     }
 
 #submitform {
       height:30px;
-      width:500px;
-  }    
+      width:1000px;
+  }
 
 #repeat{ 
      display: inline;
