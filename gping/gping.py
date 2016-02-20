@@ -24,6 +24,7 @@ def hello_world():
 def ping ():
      result = request.query_string.split ('=')
      print result[1]
+
      mythread = pingThread (result[1], q)
      threads.append(mythread)
      mythread.start ()

@@ -17,8 +17,8 @@ app.controller('MapCtrl', function ($scope,$http) {
     $scope.init = function(mylat, mylong)
     {
         //This function is sort of private constructor for controller
-        $scope.mylat = parseFloat (mylat);
-        $scope.mylong = parseFloat (mylong);
+        $scope.mylat = mylat;
+        $scope.mylong = mylong;
         console.log ($scope.mylat);
         console.log ($scope.mylong);
     };
@@ -54,7 +54,6 @@ app.controller('MapCtrl', function ($scope,$http) {
         });
         
         $scope.markers.push(marker);
-        
     }  
     
 
@@ -63,12 +62,19 @@ app.controller('MapCtrl', function ($scope,$http) {
         google.maps.event.trigger(selectedMarker, 'click');
     }
 
+    function clearMarkers() {
+      for (var i = 0; i < $scope.markers.length; i++) {
+        $scope.markers[i].setMap(null);
+      }
+      $scope.markers = [];
+    }
 
     $scope.submit = function () {
 
         var retrycount = 0;
 
         function successCallback (response) {
+            retrycount = 0;
             console.log (response.data);
             $http.get('getresult').then(resultCallback, errorCallback);
         }
@@ -83,6 +89,7 @@ app.controller('MapCtrl', function ($scope,$http) {
             }
             else
             {
+                retrycount = 0;
                 var result = angular.fromJson(response.data);
                 createMarker(result);
                 if (!result.last)
@@ -104,6 +111,7 @@ app.controller('MapCtrl', function ($scope,$http) {
             params: data
         };
 
+        clearMarkers ();
         $http.get('ping',config).then(successCallback, errorCallback);
     }
 
