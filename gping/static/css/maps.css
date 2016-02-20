@@ -2,19 +2,23 @@ body {
     font: bold 12px Arial;
     height: 100%; margin: 0; padding: 0;
      }
-
 a {
     text-decoration: none;
   }
 
+.myinfo {
+    display: inline;
+}
+
 #map{
-      height:800px; 
-      width:1000px; 
+      height:700px;
+      width:1000px;
       box-shadow: 3px 3px 10px gray;
     }
+
 #submitform {
-      height:30px; 
-      width:400px; 
+      height:30px;
+      width:500px;
   }    
 
 #repeat{ 

@@ -2,16 +2,18 @@
 <html ng-app="mapsApp">
 
 <head>
+    <title>Graph ping </title>
 	<meta charset="ISO-8859-1">
-	<link rel="stylesheet" href="css/maps.css">
+	<link rel="stylesheet" href="static/css/maps.css">
 	<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+	<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-mocks.js"></script>
+
    	<script src="http://maps.googleapis.com/maps/api/js?sensor=false&language=en"></script>
-	<script type="text/javascript" src = "js/mytest.js">  </script>
+	<script src="static/js/mytest.js"></script>
 </head>
  
 <body>
-
-   <div id="submitform" ng-controller="SubmitCtrl" ng-submit="submit()"> 
+    <div id="submitform" ng-controller="SubmitCtrl" ng-submit="submit()"> 
 		<form name="submitform">
 		  Destination: <input type="text" ng-model="text" name="text">	 
 		  <input type="submit" id="submit" value="submit">
@@ -20,15 +22,8 @@
 
 	<div ng-controller="MapCtrl">   
 	    <div id="map"></div>
-	    <div id="repeat" ng-repeat="marker in markers | orderBy : 'title'">
-	         <a id="country_container" href="#" ng-click="openInfoWindow($event, marker)">
-	         <label id="names" >{{marker.title}}</label>
-	         </a>
-	    </div>
+
 	</div>
-
-
-
 </body>
 
 

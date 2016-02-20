@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html ng-app="mapsApp">
+
+<head>
+    <title>Graph Ping </title>
+	<link rel="stylesheet" href="/static/css/maps.css">
+	<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+	<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-mocks.js"></script>
+
+   	<script src="http://maps.googleapis.com/maps/api/js?sensor=false&language=en"></script>
+    <script src="http://netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
+	<script src="/static/js/mytest.js"></script>
+</head>
+
+<body>
+    <div>
+        <p>
+           <h3 class="myinfo"> ipaddress: {{ localip }} </h3>
+           <h3 class="myinfo" id = "test1">  lat: </h3>
+           <h3 class="myinfo" id="mylat"> {{ mylat }} </h3>
+           <h3 class="myinfo" id = "test2"> long: </h3>
+           <h3 class="myinfo" id="mylong"> {{ mylong }} </h3>
+        </p>
+    </div>
+    
+ 	<div ng-controller="MapCtrl" ng-submit="submit()" ng-init="init({{ mylat }},{{ mylong }})">
+
+        <div id="submitform">
+            <form name="submitform">
+              Destination: <input type="text" ng-model="text" name="text">
+              <input type="submit" id="submit" value="submit">
+            </form>
+        </div>
+
+	    <div id="map"></div>
+
+        <div id="repeat" ng-repeat="marker in markers | orderBy : 'title'">
+	         <a id="country_container" href="#" ng-click="openInfoWindow($event, marker)">
+	         <label id="names" >{[marker.title]}</label>
+	         </a>
+	    </div>
+	</div>
+</body>
+
+
+</html>
