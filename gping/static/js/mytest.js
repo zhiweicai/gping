@@ -41,7 +41,8 @@ app.controller('MapCtrl', function ($scope,$http) {
         var marker = new google.maps.Marker({
             map: $scope.map,
             position: new google.maps.LatLng(info.loc_lat, info.loc_long),
-            title: info.ipaddress
+            title: info.ipaddress,
+            index: info.index
         });
         marker.ipaddress = '<div class="infoWindowContent">' + info.ipaddress + '</div>';
         marker.hostname = '<div class="infoWindowContent">' + info.hostname + '</div>'; 
@@ -49,7 +50,7 @@ app.controller('MapCtrl', function ($scope,$http) {
 
         
         google.maps.event.addListener(marker, 'click', function(){
-            infoWindow.setContent('<h2>' + marker.ipaddress + '</h2>' +  marker.hostname + marker.asn);
+            infoWindow.setContent('<h2>' + marker.ipaddress + '</h2>' +  marker.hostname + marker.asn + marker.index);
             infoWindow.open($scope.map, marker);
         });
         

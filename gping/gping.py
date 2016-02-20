@@ -15,6 +15,7 @@ myinfo = {}
 def hello_world():
     my_ip = urlopen('http://ip.42.pl/raw').read()
     print my_ip
+    global myinfo
     myinfo = GetHostInfo (my_ip)
     print myinfo
     return render_template('index.html',localip=my_ip,mylat=myinfo['loc_lat'],mylong = myinfo['loc_long'])
@@ -24,10 +25,8 @@ def hello_world():
 def ping ():
      result = request.query_string.split ('=')
      print result[1]
-
-     my_ip = urlopen('http://ip.42.pl/raw').read()
-     mylocalinfo = GetHostInfo (my_ip)
-     q.put (json.dumps (mylocalinfo))
+     print myinfo
+     q.put (json.dumps (myinfo))
 
      mythread = pingThread (result[1], q)
      threads.append(mythread)
