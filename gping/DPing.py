@@ -34,7 +34,7 @@ class pingThread (threading.Thread):
                         hostinfo['last'] = True
                     if (i == 19):
                         hostinfo['last'] = True
-                    hostinfo['myindex'] = i
+                    hostinfo['index'] = i
                     rq.put (json.dumps (hostinfo))
                 if (reply.ack == 1):
                    # We've reached our destination
@@ -79,7 +79,7 @@ def GetHostInfo (ipaddress):
         myipinfo['loc_lat'] = result[0]
         myipinfo['loc_long'] = result[1]
         myipinfo['last'] = False
-        myipinfo['myindex'] = 0
+        myipinfo['index'] = 0
         return myipinfo
     else:
         return ""

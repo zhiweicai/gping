@@ -46,11 +46,11 @@ app.controller('MapCtrl', function ($scope,$http) {
         });
         marker.ipaddress = '<div class="infoWindowContent">' + info.ipaddress + '</div>';
         marker.hostname = '<div class="infoWindowContent">' + info.hostname + '</div>'; 
-        marker.asn = '<div class="infoWindowContent">' + info.asn + '</div>';         
+        marker.asn = '<div class="infoWindowContent">' + info.asn + '</div>';
+        marker.indexstring = '<div class="infoWindowContent">' + info.index + '</div>';
 
-        
         google.maps.event.addListener(marker, 'click', function(){
-            infoWindow.setContent('<h2>' + marker.ipaddress + '</h2>' +  marker.hostname + marker.asn + marker.index);
+            infoWindow.setContent('<h2>' + marker.ipaddress + '</h2>' +  marker.hostname + marker.asn + marker.indexstring);
             infoWindow.open($scope.map, marker);
         });
         
